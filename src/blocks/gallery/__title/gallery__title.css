@@ -1,0 +1,18 @@
+.gallery__title {
+  color: #000;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
+  flex-shrink: 50;
+}
+
+@media screen and (max-width: 767px) {
+  .gallery__title {
+    line-height: 29px;
+  }
+}

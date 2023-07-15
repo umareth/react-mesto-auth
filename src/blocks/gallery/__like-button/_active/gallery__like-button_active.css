@@ -1,0 +1,5 @@
+.gallery__like-button_active {
+  background: url(../../../../images/like_active.svg);
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
