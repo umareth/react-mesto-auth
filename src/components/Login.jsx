@@ -24,10 +24,10 @@ function Login(props) {
       <p className="register__title">Вход</p>
       <form onSubmit={handleSubmit} className="register__form">
         <div className="register__input-container">
-          <input onChange={handleChangeEmail} type="text" className="register__input register__input_type_register" placeholder="Имя пользователя" />
-          <input onChange={handleChangePassword} type="password" className="register__input register__input_type_password" placeholder="Пароль" />
+          <input autoComplete="current-password" onChange={handleChangeEmail} type="text" className="register__input register__input_type_register" placeholder="Имя пользователя" />
+          <input autoComplete="current-password" onChange={handleChangePassword} type="password" className="register__input register__input_type_password" placeholder="Пароль" />
         </div>
-        <button type="submit" className="register__button">
+        <button type="submit" className="register__btn">
           Войти
         </button>
       </form>

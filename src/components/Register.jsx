@@ -2,7 +2,6 @@ import { Route, Routes, Navigate, useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 
 function Register(props) {
-  console.log(props);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,10 +23,10 @@ function Register(props) {
       <p className="register__title">Регистрация</p>
       <form onSubmit={handleSubmit} action="" className="register__form">
         <div className="register__input-container">
-          <input value={email} onChange={handleChangeEmail} type="email" className="register__input register__input_type_register" placeholder="Имя пользователя" />
-          <input value={password} onChange={handleChangePassword} className="register__input register__input_type_password" placeholder="Пароль" />
+          <input autoComplete="current-password" value={email} onChange={handleChangeEmail} type="email" className="register__input register__input_type_register" placeholder="Имя пользователя" />
+          <input autoComplete="current-password" value={password} onChange={handleChangePassword} type="password" className="register__input register__input_type_password" placeholder="Пароль" />
         </div>
-        <button type="submit" className="register__button">
+        <button type="submit" className="register__btn">
           Зарегистрироваться
         </button>
       </form>

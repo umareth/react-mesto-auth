@@ -1,9 +1,4 @@
 export default function Popup({ name, children, isOpen, onClose }) {
-  console.log(name);
-  console.log(children);
-  console.log(isOpen);
-  console.log(onClose);
-
   return (
     <div className={`popup popup_place_${name} ${isOpen && "popup_opened"}`}>
       <div className={`${name === "image" ? "popup__image-container" : ""} ${name === "result" ? "popup__container" : ""}`}>

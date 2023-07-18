@@ -16,6 +16,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import ProtectedComponent from "./ProtectedComponent";
 import auth from "../utils/Auth";
 import InfoTooltip from "./InfoTooltip";
+import Error404 from "./Error404.jsx";
 
 function App() {
   const [isLoaderSpinner, setLoaderSpinner] = useState(true);
@@ -32,10 +33,6 @@ function App() {
   const [isResultPopupOpen, setIsResultPopupOpen] = useState(false);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    handleTokenCheck();
-  }, [loggedIn]);
 
   useEffect(() => {
     api
@@ -55,6 +52,10 @@ function App() {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  useEffect(() => {
+    handleTokenCheck();
+  }, [loggedIn]);
 
   const handleCardLike = async (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -110,22 +111,18 @@ function App() {
       });
   }
 
-  function handleLoginSubmit(data) {
-    auth
-      .login(data)
-      .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        setLoggedIn(true);
-        setEmail(data.email);
-        setIsResultPopupOpen(true);
-        setIsSuccess(true);
-        navigate("/", { replace: true });
-      })
-      .catch((error) => {
-        setIsResultPopupOpen(false);
-        setIsSuccess(false);
-        console.log(`Ошибка при авторизации: ${error}`);
-      });
+  async function handleLoginSubmit(data) {
+    try {
+      const res = await auth.login(data);
+      localStorage.setItem("jwt", res.token);
+      setLoggedIn(true);
+      setEmail(data.email);
+      navigate("/", { replace: true });
+    } catch (error) {
+      setIsResultPopupOpen(true);
+      setIsSuccess(false);
+      console.log(`Ошибка при авторизации: ${error}`);
+    }
   }
 
   function handleRegistSubmit(InputValue) {
@@ -133,9 +130,13 @@ function App() {
     auth
       .register(InputValue)
       .then(() => {
+        setIsResultPopupOpen(true);
+        setIsSuccess(true);
         navigate("/sign-in", { replace: true });
       })
       .catch((error) => {
+        setIsResultPopupOpen(true);
+        setIsSuccess(false);
         console.log(`Ошибка при регистрации: ${error}`);
       });
   }
@@ -227,12 +228,21 @@ function App() {
               </>
             }
           />
+          <Route
+            path="*"
+            element={
+              <>
+                <Header name="register" />
+                <Error404 />
+              </>
+            }
+          />
         </Routes>
         <Footer />
         <InfoTooltip
           name="result"
-          successText="Вы успешно зарегистрировались"
-          failText="Что-то пошло не так! Попробуйте еще раз."
+          successMessage="Вы успешно зарегистрировались"
+          failureMessage="Что-то пошло не так! Попробуйте еще раз."
           isSuccess={isSuccess}
           isOpen={isResultPopupOpen}
           onClose={closeAllPopups}
