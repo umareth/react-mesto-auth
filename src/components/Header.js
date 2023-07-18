@@ -14,7 +14,7 @@ function Header(props) {
         <>
           <div className="header__profile-container">
             <p className="header__profile-email">e-mail:{props.email}</p>
-            <Link to={"sign-in"} className="header__link" onClick={props.Signout}>
+            <Link to={"sign-in"} className="header__link" onClick={props.handleLogOut}>
               Выйти
             </Link>
           </div>

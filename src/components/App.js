@@ -54,7 +54,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    handleTokenCheck();
+    handleJwtCheck();
   }, [loggedIn]);
 
   const handleCardLike = async (card) => {
@@ -141,24 +141,27 @@ function App() {
       });
   }
 
-  function handleTokenCheck() {
+  async function handleJwtCheck() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      auth
-        .checkToken(jwt)
-        .then((res) => {
-          setLoggedIn(true);
-          setEmail(res.data.email);
-          navigate("/");
-        })
-        .catch(console.error);
+      try {
+        const res = await auth.checkToken(jwt);
+        setLoggedIn(true);
+        setEmail(res.data.email);
+        navigate("/");
+      } catch (error) {
+        console.error("Ошибка при проверке токена:", error);
+        // В случае ошибки, сбросить авторизацию пользователя
+        setLoggedIn(false);
+      }
     } else {
+      // Если токен отсутствует, сбросить авторизацию пользователя
       setLoggedIn(false);
     }
   }
 
-  function signout() {
-    // console.log("удаление jwt");
+  function handleLogOut() {
+    setLoggedIn(false);
     localStorage.removeItem("jwt");
   }
 
@@ -206,7 +209,7 @@ function App() {
                 element={ProtectedComponent}
                 loggedIn={loggedIn}
                 email={email}
-                signout={signout}
+                handleLogOut={handleLogOut}
               />
             }
           />
