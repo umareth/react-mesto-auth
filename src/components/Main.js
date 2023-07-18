@@ -3,14 +3,14 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { api } from "../utils/Api";
 import Card from "./Card";
 import LoaderSpinner from "./LoaderSpinner";
+import Login from "./Login";
+import Register from "./Register";
 
 function Main(props) {
-  // console.log(props);
   const currentUser = React.useContext(CurrentUserContext);
-
   return props.isLoaderSpinner ? (
     <LoaderSpinner />
-  ) : (
+  ) : props.name === "main" ? (
     <main>
       <section className="profile">
         <div className="profile__content">
@@ -33,6 +33,10 @@ function Main(props) {
         ))}
       </section>
     </main>
+  ) : props.name === "register" ? (
+    <Register name={props.name} handleSignup={props.handleSignup} /> // Используем компонент Register
+  ) : (
+    <Login name={props.name} handleSignin={props.handleSignin} /> // Используем компонент Login
   );
 }
 
