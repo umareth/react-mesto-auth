@@ -8,7 +8,6 @@ const ProtectedComponent = (props) => {
     <>
       <Header email={props.email} handleLogOut={props.handleLogOut} />
       <Main name="main" {...props} />
-      <Footer />
     </>
   );
 };
