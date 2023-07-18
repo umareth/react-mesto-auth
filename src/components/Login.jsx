@@ -24,8 +24,8 @@ function Login(props) {
       <p className="register__title">Вход</p>
       <form onSubmit={handleSubmit} className="register__form">
         <div className="register__input-container">
-          <input autoComplete="current-password" onChange={handleChangeEmail} type="text" className="register__input register__input_type_register" placeholder="Имя пользователя" />
-          <input autoComplete="current-password" onChange={handleChangePassword} type="password" className="register__input register__input_type_password" placeholder="Пароль" />
+          <input autoComplete="current-password" value={email} onChange={handleChangeEmail} type="text" className="register__input register__input_type_register" placeholder="Имя пользователя" />
+          <input autoComplete="current-password" value={password} onChange={handleChangePassword} type="password" className="register__input register__input_type_password" placeholder="Пароль" />
         </div>
         <button type="submit" className="register__btn">
           Войти

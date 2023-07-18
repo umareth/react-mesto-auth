@@ -10,7 +10,7 @@ function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
   return props.isLoaderSpinner ? (
     <LoaderSpinner />
-  ) : props.name === "main" ? (
+  ) : (
     <main>
       <section className="profile">
         <div className="profile__content">
@@ -33,10 +33,6 @@ function Main(props) {
         ))}
       </section>
     </main>
-  ) : props.name === "register" ? (
-    <Register name={props.name} handleSignup={props.handleSignup} /> // Используем компонент Register
-  ) : (
-    <Login name={props.name} handleSignin={props.handleSignin} /> // Используем компонент Login
   );
 }
 

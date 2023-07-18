@@ -48,6 +48,7 @@ function App() {
       .getCards()
       .then((res) => {
         setCards(res);
+
         setLoaderSpinner(false);
       })
       .catch((error) => console.log(error));
@@ -55,7 +56,8 @@ function App() {
 
   useEffect(() => {
     handleJwtCheck();
-  }, [loggedIn]);
+    // console.log("проверл jwt");
+  }, []);
 
   const handleCardLike = async (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -218,7 +220,7 @@ function App() {
             element={
               <>
                 <Header name="register" />
-                <Main name="register" handleSignup={handleRegistSubmit} />
+                <Register name="register" handleSignup={handleRegistSubmit} />
               </>
             }
           />
@@ -227,7 +229,7 @@ function App() {
             element={
               <>
                 <Header name="login" />
-                <Main name="login" handleSignin={handleLoginSubmit} />
+                <Login name="login" handleSignin={handleLoginSubmit} />
               </>
             }
           />
