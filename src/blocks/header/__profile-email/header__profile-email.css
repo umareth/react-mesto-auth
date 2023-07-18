@@ -4,4 +4,6 @@
   font-weight: 500;
   line-height: 22px;
   margin-right: 24px;
+  overflow: hidden; /* Скрываем содержимое, которое выходит за пределы контейнера */
+  text-overflow: ellipsis; /* Добавляем многоточие (...) в конце текста, который не вмещается */
 }
